@@ -86,7 +86,7 @@ func main() {
 			r := &row{value: make(map[string]string), sql: "INSERT INTO `" + tableName + "` SET ", ot: otherTable{}}
 			tmp := 0
 			for key, value := range c.useColumns {
-				r.value[value[0]], _ = xlFile.Sheets[0].Rows[i].Cells[key].String()
+				r.value[value[0]] = xlFile.Sheets[0].Rows[i].Cells[key].String()
 
 				//解析内容
 				if value[0] == ":other" {
@@ -204,7 +204,7 @@ func main() {
 func (c *columns) paraseColumns() {
 	c.useColumns = make([][]string, len(c.xlsxColumns))
 	for key, value := range c.xlsxColumns {
-		thiscolumn, _ := value.String()
+		thiscolumn := value.String()
 		columnval := strings.Split(thiscolumn, "|")
 		if columnval[0] == ":other" {
 			c.useColumns[key] = columnval
